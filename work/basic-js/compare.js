@@ -3,8 +3,28 @@
 module.exports = compare; // DO NOT MODIFY - USED FOR TESTING
 
 function compare( word, guess ) {  // DO NOT MODIFY
+  if (!word || !guess)
+    return 0;
 
-/* YOU MAY MODIFY THE LINES BELOW */
+  let newWord = word.toLowerCase();
+  let newGuess = guess.toLowerCase();
 
-  return 0; // this line is wrong
+  let arr = new Array(256);
+  arr.fill(0);
+
+  for (let i in newWord) {
+    let code = newWord.charCodeAt(i);
+    arr[code]++;
+  }
+
+  let cnt = 0;
+  for (let i in newGuess) {
+    let code = newGuess.charCodeAt(i);
+    if (arr[code] > 0) {
+      cnt++;
+      arr[code]--;
+    }
+  }
+
+  return cnt; // this line is wrong
 }
