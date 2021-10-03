@@ -1,0 +1,28 @@
+.display-panel {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: darkcyan;
+    background-color: rgb(224, 247, 239);
+}
+
+.users {
+    color: blue;
+}
+
+.message {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.message-sender {
+    color: darkcyan;
+    font-weight: bold;
+}
+
+.form-panel {
+    padding: 20px;
+    margin-top: 5px;
+    border-style: double;
+    border-width: 3px;
+    border-color: darkcyan;
+    background-color: rgb(224, 247, 239);
+}
