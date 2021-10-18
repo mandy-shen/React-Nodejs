@@ -51,11 +51,15 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/changeWord', (req, res) => {
-  const word = req.body.word.trim();
+  const newWord = req.body.word.trim();
   const sid = req.cookies.sid;
   const username = sessions[sid];
 
-  data.users[username] = word;
+  const originalWord = data.users[username];
+  data.users[username] = newWord;
+
+  if (originalWord)
+    console.log(`[INFO][ChangeWord] username: ${username}, original_word: ${originalWord}, new_word: ${newWord}`);
 
   res.redirect('/');
 });
