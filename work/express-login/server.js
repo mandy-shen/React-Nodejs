@@ -32,7 +32,8 @@ app.post('/login', (req, res) => {
   const username = req.body.username.trim();
   const regex = /^[\w\d]+$/;
   if (!username || username === 'dog' || !username.match(regex)) {
-    res.status(401).send('this is a bad message');
+    res.status(401)
+        .send('This is a bad input. Please go back to <a href="http://localhost:3000/">home page</a>.');
     return;
   }
 
