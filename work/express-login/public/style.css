@@ -1,0 +1,17 @@
+.display-panel {
+    padding: 20px;
+    margin-top: 5px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: darkcyan;
+    background-color: rgb(224, 247, 239);
+}
+
+.form-panel {
+    padding: 20px;
+    margin-top: 5px;
+    border-style: double;
+    border-width: 3px;
+    border-color: darkcyan;
+    background-color: rgb(224, 247, 239);
+}
