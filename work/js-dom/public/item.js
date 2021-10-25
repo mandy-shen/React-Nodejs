@@ -23,8 +23,7 @@
   disableButtonIfNoInput();
   addItem();
   delItem();
-  addItemQuantity();
-  delItemQuantity();
+  modifyQuantity();
 
   render(items);
 
@@ -73,30 +72,20 @@
 
       const index = e.target.dataset.index;
       items.splice(index, 1);
-      
-      render(items);
-    });
-  }
-
-  function addItemQuantity() {
-    listEl.addEventListener('click', (e) => {
-      if(!e.target.classList.contains('increase'))
-        return;
-
-      const index = e.target.dataset.index;
-      items[index].quantity++;
 
       render(items);
     });
   }
 
-  function delItemQuantity() {
+  function modifyQuantity() {
     listEl.addEventListener('click', (e) => {
-      if(!e.target.classList.contains('decrease'))
-        return;
-
       const index = e.target.dataset.index;
-      items[index].quantity--;
+
+      if(e.target.classList.contains('increase')) {
+        items[index].quantity++;
+      } else if (e.target.classList.contains('decrease')) {
+        items[index].quantity--;
+      }
 
       render(items);
     });
