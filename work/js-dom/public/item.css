@@ -1,0 +1,30 @@
+#item-app li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: rgb(224, 247, 239);
+}
+
+#item-app .delete {
+  font-weight: bold;
+  background: darkcyan;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+#item-app .increase {
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: bold;
+  background: darkseagreen;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+#item-app .decrease {
+  padding-left: 3px;
+  padding-right: 3px;
+  font-weight: bold;
+  background: indianred;
+  border: 1px solid black;
+  cursor: pointer;
+}
