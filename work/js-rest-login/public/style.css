@@ -1,0 +1,32 @@
+#app .logout-panel {
+  padding-left: 2px;
+  padding-right: 2px;
+  background: indianred;
+  border: 1px solid black;
+  display: none;
+}
+#app .logout-panel.islogin {
+  padding-left: 2px;
+  padding-right: 2px;
+  background: indianred;
+  border: 1px solid black;
+  display: block;
+}
+
+#app .login-panel {
+  padding-left: 2px;
+  padding-right: 2px;
+  background: darkseagreen;
+  border: 1px solid black;
+  display: block;
+}
+#app .login-panel.islogin {
+  padding-left: 2px;
+  padding-right: 2px;
+  background: darkseagreen;
+  border: 1px solid black;
+  display: none;
+}
+#app #status {
+  color: red;
+}
