@@ -1,14 +1,14 @@
 #app .logout-panel {
   padding-left: 2px;
   padding-right: 2px;
-  background: indianred;
+  background: lightblue;
   border: 1px solid black;
   display: none;
 }
 #app .logout-panel.islogin {
   padding-left: 2px;
   padding-right: 2px;
-  background: indianred;
+  background: lightblue;
   border: 1px solid black;
   display: block;
 }
