@@ -11,10 +11,11 @@ const homeWeb = {
           <main id="app">
             <div class="top-panel">
                 ${homeWeb.getLogoutBtn()}
-                ${homeWeb.getNewGameBtn()}
             </div>
             <div class="form-panel">
-                ${homeWeb.getGuessForm(errMsg)}
+                ${homeWeb.getGuessForm(game)}
+                ${homeWeb.getNewGameBtn()}
+                <div class="error-panel">${errMsg==='' ? '': 'Error: '+errMsg}</div>
             </div>
             <div class="display-panel">
                 <div>Count: ${game.cnt}</div>
@@ -43,27 +44,30 @@ const homeWeb = {
     return words.map((word) => `<li>${word}</li>`).join('');
   },
 
-  getGuessForm: function(errMsg) {
+  getGuessForm: function(game) {
+    if (game.isFinished)
+      return ``;
+
     return `
     <form action="/guess" method="POST" id="guess">
-      <label for="guessWord">Guess Word:</label> 
-      <input type="text" name="guessWord">
+      <label for="guessWd">Guess Word:</label> 
+      <input type="text" name="guessWd" id="guessWd">
       <button type="submit" form="guess">Submit</button>
     </form>
-    <div class="error-panel">${errMsg==='' ? '': 'Error: '+errMsg}</div>`;
+    `;
   },
 
   getNewGameBtn: function() {
     return `
     <form action="/new-game" method="POST">
-      <input type="submit" value="New Game">
+      <button type="submit">New Game</button>
     </form>`;
   },
 
   getLogoutBtn: function() {
     return `
     <form action="/logout" method="POST">
-      <input type="submit" value="Logout">
+      <button type="submit">Logout</button>
     </form>`;
   },
 };

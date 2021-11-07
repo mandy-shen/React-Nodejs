@@ -8,7 +8,7 @@ function newGame(username) {
     const game = {
         username: username,
         validWords: words,
-        word: pickWord(words),
+        word: getRandomWord(words),
         prevMsgs: [],
         cnt: 0,
         isFinished: false,
@@ -21,7 +21,7 @@ function newGame(username) {
     return game;
 }
 
-function takeTurn(username, guess) {
+function guessWord(username, guess) {
     if (!username || !guess)
         return;
 
@@ -32,9 +32,9 @@ function takeTurn(username, guess) {
 
     game.cnt++;
 
-    if (exactMatch(game.word, guess)) {
+    if (isMatched(game.word, guess)) {
         game.isFinished = true;
-        game.prevMsgs.unshift(`CORRECT! Won in ${game.cnt} turns! secretWord: ${game.word}`);
+        game.prevMsgs.unshift(`Turn ${game.cnt}, <b>WON THE GAME!</b> Secret Word: <b>${game.word}</b>`);
         return;
     }
 
@@ -44,15 +44,15 @@ function takeTurn(username, guess) {
     }
 
     const match = compare(game.word, guess);
-    game.prevMsgs.unshift(`<b>${guess}</b>, matched: <b>${match}/${game.word.length}</b> letters, turn: ${game.cnt}`);
+    game.prevMsgs.unshift(`Turn ${game.cnt}, <b>${guess}</b>, matched: <b>${match}/${game.word.length}</b> letters`);
 }
 
-function exactMatch(word, guess) {
+function isMatched(word, guess) {
     return word.toUpperCase() === guess.toUpperCase();
 }
 
-function pickWord(wordList) {
-    return wordList[Math.floor(Math.random() * wordList.length)];
+function getRandomWord(words) {
+    return words[Math.floor(Math.random() * words.length)];
 }
 
 function compare(word, guess) {
@@ -85,7 +85,7 @@ function compare(word, guess) {
 const game = {
     games,
     newGame,
-    takeTurn,
+    guessWord,
 };
 
 module.exports = game;

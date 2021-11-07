@@ -16,6 +16,10 @@
     background-color: rgb(224, 247, 239);
 }
 
+.form-panel form {
+    display: inline;
+}
+
 .error-panel {
     color: red;
     margin-top: 5px;

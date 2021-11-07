@@ -78,7 +78,7 @@ app.post('/guess', (req, res) => {
     return;
   }
 
-  const guess = req.body.guessWord.trim();
+  const guess = req.body.guessWd.trim();
   const currGame = game.games[username];
 
   if (!currGame.validWords.includes(guess)) {
@@ -86,7 +86,7 @@ app.post('/guess', (req, res) => {
     return;
   }
 
-  game.takeTurn(username, guess);
+  game.guessWord(username, guess);
   res.redirect('/');
 });
 
