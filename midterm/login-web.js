@@ -1,5 +1,5 @@
 const loginWeb = {
-  loginPage: function() {
+  loginPage: function(errMsg) {
     return `
       <!doctype html>
       <html lang="en">
@@ -10,7 +10,7 @@ const loginWeb = {
         <body>
           <div class="app">
             <div class="form-panel">
-                ${loginWeb.getForm()}
+                ${loginWeb.getForm(errMsg)}
             </div>
           </div>
         </body>
@@ -18,13 +18,14 @@ const loginWeb = {
   `;
   },
 
-  getForm: function() {
+  getForm: function(errMsg) {
     return `
     <form action="/login" method="POST">
       <label for="username">User Name:</label> 
       <input type="text" id="username" name="username">
       <input type="submit" value="Submit">
-    </form>`;
-  }
+    </form>
+    <div class="error-panel">${errMsg==='' ? '': 'Error Message: '+errMsg}</div>`;
+  },
 };
 module.exports = loginWeb;

@@ -1,5 +1,6 @@
+const words = require("./words");
 const dataWeb = {
-  dataPage: function(data) {
+  dataPage: function(game) {
     return `
       <!doctype html>
       <html lang="en">
@@ -10,13 +11,15 @@ const dataWeb = {
         <body>
           <div class="app">
             <div class="top-panel">
-                <a href="http://localhost:3000/logout">Logout</a>
-            </div><br/>
-            <div class="display-panel">
-                ${dataWeb.getWord(data.obj)}
+                ${dataWeb.getLogoutBtn()}
             </div>
             <div class="form-panel">
-                ${dataWeb.getForm(data.obj)}
+                ${dataWeb.getNewGameBtn()}
+                ${dataWeb.getGuessForm()}
+            </div>
+            <div class="display-panel">
+                <ul>${dataWeb.getHistory(game)}</ul>
+                <ul>${dataWeb.getPossibleWords(words)}</ul>
             </div>
           </div>
         </body>
@@ -24,19 +27,38 @@ const dataWeb = {
   `;
   },
 
-  getWord: function(obj) {
-    if (obj.username && obj.word)
-      return `<span>${obj.username}: ${obj.word}</span>`;
-
-    return `<span>${obj.username}: (No data)</span>`;
+  getHistory: function(game) {
+    return game.prevMsgs.map((msg, index) => {
+      return `<li>${msg}</li>`;
+    }).join('');
   },
 
-  getForm: function(obj) {
+  getPossibleWords: function(words) {
+    return words.map((word, index) => {
+      return `<li>${word}</li>`;
+    }).join('');
+  },
+
+  getGuessForm: function() {
     return `
-    <form action="/changeWord" method="POST">
-      <label for="word">Stored Word:</label> 
-      <input type="text" id="word" name="word" value="${obj.word}">
+    <form action="/guess" method="POST">
+      <label for="guessWord">Guess Word:</label> 
+      <input type="text" id="guessWord" name="guessWord" value="">
       <input type="submit" value="Submit">
+    </form>`;
+  },
+
+  getNewGameBtn: function() {
+    return `
+    <form action="/new-game" method="POST">
+      <input type="submit" value="New Game">
+    </form>`;
+  },
+
+  getLogoutBtn: function() {
+    return `
+    <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
     </form>`;
   },
 };
