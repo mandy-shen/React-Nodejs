@@ -10,7 +10,7 @@ function newGame(username) {
         validWords: words,
         word: pickWord(words),
         prevMsgs: [],
-        turns: 0,
+        cnt: 0,
         isFinished: false,
     };
 
@@ -30,13 +30,11 @@ function takeTurn(username, guess) {
     if (game.isFinished)
         return;
 
-    game.turns++;
+    game.cnt++;
 
     if (exactMatch(game.word, guess)) {
         game.isFinished = true;
-        game.prevMsgs.unshift(`CORRECT! Won in ${game.turns} turns! secretWord: ${game.word}`);
-
-        console.log(`[INFO][takeTurn] username: ${username}, secretWord: ${game.word}, Won game`);
+        game.prevMsgs.unshift(`CORRECT! Won in ${game.cnt} turns! secretWord: ${game.word}`);
         return;
     }
 
@@ -46,11 +44,11 @@ function takeTurn(username, guess) {
     }
 
     const match = compare(game.word, guess);
-    game.prevMsgs.unshift(`<b>${guess}</b>, matched: <b>${match}/${game.word.length}</b> letters, turn: ${game.turns}`);
+    game.prevMsgs.unshift(`<b>${guess}</b>, matched: <b>${match}/${game.word.length}</b> letters, turn: ${game.cnt}`);
 }
 
 function exactMatch(word, guess) {
-    return word.toUpperCase() === guess.toUpperCase(); // Case-insensitive compare
+    return word.toUpperCase() === guess.toUpperCase();
 }
 
 function pickWord(wordList) {

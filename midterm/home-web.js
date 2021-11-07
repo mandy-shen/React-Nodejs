@@ -1,31 +1,32 @@
-const dataWeb = {
-  dataPage: function(game) {
+const homeWeb = {
+  homePage: function(game, errMsg) {
     return `
       <!doctype html>
       <html lang="en">
         <head>
           <link rel="stylesheet" href="style.css">
-          <title>Data</title>
+          <title>HomePage</title>
         </head>
         <body>
           <main id="app">
             <div class="top-panel">
-                ${dataWeb.getLogoutBtn()}
-                ${dataWeb.getNewGameBtn()}
+                ${homeWeb.getLogoutBtn()}
+                ${homeWeb.getNewGameBtn()}
             </div>
             <div class="form-panel">
-                ${dataWeb.getGuessForm()}
+                ${homeWeb.getGuessForm(errMsg)}
             </div>
             <div class="display-panel">
-                <div>Count: ${game.turns}</div>
+                <div>Count: ${game.cnt}</div>
                 <div>Lastest Message: ${game.prevMsgs[0] || ''}</div>
-                
-                <div>Past Guessed Words (${game.prevMsgs.length}):
-                    <ul>${dataWeb.getHistory(game.prevMsgs)}</ul>
-                </div>
-                <div id="validWords">Valid Words (${game.validWords.length}):
-                    <ul>${dataWeb.getValidWords(game.validWords)}</ul>
-                </div>
+                <section>
+                    <h3>Past Guessed Words (${game.prevMsgs.length}):</h3>
+                    <ul>${homeWeb.getHistory(game.prevMsgs)}</ul>
+                </section>
+                <section id="validWords">
+                    <h3>Valid Words (${game.validWords.length}):</h3>
+                    <ul>${homeWeb.getValidWords(game.validWords)}</ul>
+                </section>
             </div>
           </main>
           <script src="init.js"></script>
@@ -42,14 +43,14 @@ const dataWeb = {
     return words.map((word) => `<li>${word}</li>`).join('');
   },
 
-  getGuessForm: function() {
+  getGuessForm: function(errMsg) {
     return `
     <form action="/guess" method="POST" id="guess">
       <label for="guessWord">Guess Word:</label> 
       <input type="text" name="guessWord">
       <button type="submit" form="guess">Submit</button>
     </form>
-    <div class="error-panel"></div>`;
+    <div class="error-panel">${errMsg==='' ? '': 'Error: '+errMsg}</div>`;
   },
 
   getNewGameBtn: function() {
@@ -66,4 +67,4 @@ const dataWeb = {
     </form>`;
   },
 };
-module.exports = dataWeb;
+module.exports = homeWeb;

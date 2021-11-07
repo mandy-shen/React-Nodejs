@@ -28,16 +28,17 @@
 
                 const error = document.querySelector('.error-panel');
                 error.innerHTML = 'Error: invalid input = '+input;
+                inputEl.value = '';
             }
         });
 
     }
 
     function isValidGuess(guess) {
-        let validWords = "";
+        let validWords = '';
 
         for (const li of document.querySelectorAll('#validWords>ul>li'))
-            validWords += "," + li.textContent;
+            validWords += ',' + li.textContent;
 
         return validWords.includes(guess);
     }
