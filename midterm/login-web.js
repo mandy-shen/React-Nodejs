@@ -8,11 +8,12 @@ const loginWeb = {
           <title>Login</title>
         </head>
         <body>
-          <div class="app">
+          <main id="app">
             <div class="form-panel">
                 ${loginWeb.getForm(errMsg)}
             </div>
-          </div>
+          </main>
+          <script src="init.js"></script>  
         </body>
       </html>
   `;
@@ -20,12 +21,12 @@ const loginWeb = {
 
   getForm: function(errMsg) {
     return `
-    <form action="/login" method="POST">
+    <form action="/login" method="POST" id="login">
       <label for="username">User Name:</label> 
       <input type="text" id="username" name="username">
-      <input type="submit" value="Submit">
+      <button type="submit" form="login">Submit</button>
     </form>
-    <div class="error-panel">${errMsg==='' ? '': 'Error Message: '+errMsg}</div>`;
+    <div class="error-panel">${errMsg==='' ? '': 'Error: '+errMsg}</div>`;
   },
 };
 module.exports = loginWeb;

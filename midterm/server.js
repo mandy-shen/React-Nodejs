@@ -32,12 +32,6 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   const username = req.body.username.trim();
-  const letterRegex = /^[\w]+$/;
-  const numberRegex = /^[\d]+$/;
-
-  if (!username || username === 'dog' || username.match(numberRegex) || !username.match(letterRegex)) {
-    return;
-  }
 
   const sid = uuidv4();
   res.cookie('sid', sid);
@@ -57,7 +51,7 @@ app.post('/new-game', (req, res) => {
   const sid = req.cookies.sid;
   const username = sessions[sid];
 
-  game.newGame(username);
+  delete game.games[username];
   res.redirect('/');
 });
 

@@ -1,4 +1,3 @@
-const words = require("./words");
 const dataWeb = {
   dataPage: function(game) {
     return `
@@ -9,43 +8,48 @@ const dataWeb = {
           <title>Data</title>
         </head>
         <body>
-          <div class="app">
+          <main id="app">
             <div class="top-panel">
                 ${dataWeb.getLogoutBtn()}
+                ${dataWeb.getNewGameBtn()}
             </div>
             <div class="form-panel">
-                ${dataWeb.getNewGameBtn()}
                 ${dataWeb.getGuessForm()}
             </div>
             <div class="display-panel">
-                <ul>${dataWeb.getHistory(game)}</ul>
-                <ul>${dataWeb.getPossibleWords(words)}</ul>
+                <div>Count: ${game.turns}</div>
+                <div>Lastest Message: ${game.prevMsgs[0] || ''}</div>
+                
+                <div>Past Guessed Words (${game.prevMsgs.length}):
+                    <ul>${dataWeb.getHistory(game.prevMsgs)}</ul>
+                </div>
+                <div id="validWords">Valid Words (${game.validWords.length}):
+                    <ul>${dataWeb.getValidWords(game.validWords)}</ul>
+                </div>
             </div>
-          </div>
+          </main>
+          <script src="init.js"></script>
         </body>
       </html>
   `;
   },
 
-  getHistory: function(game) {
-    return game.prevMsgs.map((msg, index) => {
-      return `<li>${msg}</li>`;
-    }).join('');
+  getHistory: function(msgs) {
+    return msgs.map((msg) => `<li>${msg}</li>`).join('');
   },
 
-  getPossibleWords: function(words) {
-    return words.map((word, index) => {
-      return `<li>${word}</li>`;
-    }).join('');
+  getValidWords: function(words) {
+    return words.map((word) => `<li>${word}</li>`).join('');
   },
 
   getGuessForm: function() {
     return `
-    <form action="/guess" method="POST">
+    <form action="/guess" method="POST" id="guess">
       <label for="guessWord">Guess Word:</label> 
-      <input type="text" id="guessWord" name="guessWord" value="">
-      <input type="submit" value="Submit">
-    </form>`;
+      <input type="text" name="guessWord">
+      <button type="submit" form="guess">Submit</button>
+    </form>
+    <div class="error-panel"></div>`;
   },
 
   getNewGameBtn: function() {

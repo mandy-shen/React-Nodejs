@@ -2,32 +2,51 @@ const words = require("./words");
 const games = {};
 
 function newGame(username) {
+    if (!username)
+        return;
+
     const game = {
         username: username,
+        validWords: words,
         word: pickWord(words),
         prevMsgs: [],
-        turns: 0
+        turns: 0,
+        isFinished: false,
     };
+
     games[username] = game;
+
     console.log(`[INFO][newGame] username: ${username}, secretWord: ${game.word}`);
+
     return game;
 }
 
 function takeTurn(username, guess) {
-    if(!guess)
+    if (!username || !guess)
         return;
 
     const game = games[username] || newGame(username);
 
+    if (game.isFinished)
+        return;
+
     game.turns++;
 
-    if(exactMatch(game.word, guess)) {
-        game.prevMsgs.push(`CORRECT!  You won in ${game.turns} turns!`);
+    if (exactMatch(game.word, guess)) {
+        game.isFinished = true;
+        game.prevMsgs.unshift(`CORRECT! Won in ${game.turns} turns! secretWord: ${game.word}`);
+
+        console.log(`[INFO][takeTurn] username: ${username}, secretWord: ${game.word}, Won game`);
         return;
     }
 
+    const index = game.validWords.indexOf(guess);
+    if (index > -1) {
+        game.validWords.splice(index, 1);
+    }
+
     const match = compare(game.word, guess);
-    game.prevMsgs.push(`<b>${username}</b> => guess: <b>${guess}</b>; match: <b>${match}/${game.word.length}</b> letters`);
+    game.prevMsgs.unshift(`<b>${guess}</b>, matched: <b>${match}/${game.word.length}</b> letters, turn: ${game.turns}`);
 }
 
 function exactMatch(word, guess) {
