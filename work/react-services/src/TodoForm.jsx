@@ -17,7 +17,7 @@ const TodoForm = ({onAddTodo}) => {
 
     return (
         <form>
-            <label>New Task</label>
+            <label>New Task: </label>
             <input className="to-add" type="text" value={task} onChange={handleChange}/>
             <button className="add" type="submit" onClick={handleSubmit}>Add</button>
         </form>

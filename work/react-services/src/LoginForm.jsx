@@ -18,7 +18,7 @@ const LoginForm = ({onLogin}) => {
     return (
         <div className="login">
         <form>
-            <label>Username</label>
+            <label>Username: </label>
             <input type="text" value={user} name="username" onChange={handleChange} />
             <button type="submit" onClick={handleSubmit} >Login</button>
         </form>
