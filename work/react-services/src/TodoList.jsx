@@ -1,7 +1,6 @@
 
 
 function TodoList({todos, onUpdateTodo, onDeleteTodo}) {
-    console.log("todos="+todos);
 
     const list = Object.values(todos).map( todo => (
       <li className="todo" key={todo.id}>

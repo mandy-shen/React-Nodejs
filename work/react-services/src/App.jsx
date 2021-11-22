@@ -21,25 +21,36 @@ function App() {
     const [user, setUser] = useState('');
     const [todos, setTodos] = useState({});
 
-    const trigger1 = user === '';
-
-    useEffect(() => console.log('effect!!!'), [trigger1]);
-
-    if (user) {
+    const checkLogin = () => {
         fetchSession()
-        .then(results => {
-            console.log(results);
-            setUser(results);
+        .then(username => {
+            setUser(username || '');
         })
         .catch(err => {
             console.error(err);
         });
     }
 
+    const checkTodos = () => {
+        fetchTodos()
+        .then(todos => {
+            setTodos(todos || '');
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    }
+
+    useEffect(
+        () => console.log('effect!!!'),
+        [checkLogin, checkTodos]
+    );
+
+
+
     const onLogin = (username) => {
         fetchLogin(username)
         .then(results => {
-            console.log(results);
             setTodos(results);
             setUser(username);
         })
@@ -50,8 +61,8 @@ function App() {
 
     const onLogout = () => {
         fetchLogout()
-        .then(results => {
-            console.log(results);
+        .then(() => {
+            setTodos('');
             setUser('');
         })
         .catch(err => {
@@ -61,17 +72,8 @@ function App() {
 
     const onAddTodo = (newTask) => {
         fetchAddTodo(newTask)
-        .then(results => {
-            console.log(results);
-
-            fetchTodos()
-            .then(todos =>{
-                console.log("res_todos="+ todos);
-                setTodos(todos);
-            })
-            .catch(err => {
-                console.error(err);
-            });;
+        .then(() => {
+            checkTodos();
         })
         .catch(err => {
             console.error(err);
@@ -80,26 +82,15 @@ function App() {
 
     const onUpdateTodo = (id, task, done) => {
 
-        console.log("id="+id+",task="+task+",done="+done);
-
-        const todo = {
+        const updateTodo = {
             id: id,
             task: task,
             done: done,
         }
 
-        fetchUpdateTodo(id, todo)
-        .then(results => {
-            console.log(results);
-
-            fetchTodos()
-            .then(todos =>{
-                console.log("res_todos="+ todos);
-                setTodos(todos);
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        fetchUpdateTodo(id, updateTodo)
+        .then(() => {
+            checkTodos();
         })
         .catch(err => {
             console.error(err);
@@ -108,17 +99,8 @@ function App() {
 
     const onDeleteTodo = (id) => {
         fetchDeleteTodo(id)
-        .then(results => {
-            console.log(results);
-
-            fetchTodos()
-            .then(todos =>{
-                console.log("res_todos="+ todos);
-                setTodos(todos);
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        .then(() => {
+            checkTodos();
         })
         .catch(err => {
             console.error(err);
