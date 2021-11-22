@@ -16,6 +16,8 @@ import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 
 function App() {
+
+    const [isLogout, setIsLogout] = useState(true);
     const [todos, setTodos] = useState({});
 
     const onLogin = (username) => {
@@ -23,6 +25,7 @@ function App() {
         .then(results => {
             console.log(results);
             setTodos(results);
+            setIsLogout(false);
         })
         .catch(err => {
             console.log(err);
@@ -33,7 +36,7 @@ function App() {
         fetchLogout()
         .then(results => {
             console.log(results);
-
+            setIsLogout(true);
         })
         .catch(err => {
             console.log(err);
@@ -97,14 +100,17 @@ function App() {
 
     return (
         <div className="app">
-            <LoginForm onLogin={onLogin}></LoginForm>
-            <LogoutForm onLogout={onLogout}></LogoutForm>
-            <div className="content">
-                <TodoList todos={todos}
-                          onUpdateTodo={onUpdateTodo}
-                          onDeleteTodo={onDeleteTodo}></TodoList>
-                <TodoForm onAddTodo={onAddTodo}></TodoForm>
-            </div>
+            {isLogout
+                ? (<LoginForm onLogin={onLogin}></LoginForm>)
+
+                : (<div className="content">
+                    <LogoutForm onLogout={onLogout}></LogoutForm>
+                    <TodoList todos={todos}
+                              onUpdateTodo={onUpdateTodo}
+                              onDeleteTodo={onDeleteTodo}></TodoList>
+                    <TodoForm onAddTodo={onAddTodo}></TodoForm>
+                </div>
+            )}
         </div>
     );
 }
