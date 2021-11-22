@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import './App.css';
 
 import {
     fetchLogin,
     fetchLogout,
+    fetchSession,
     fetchAddTodo,
     fetchUpdateTodo,
     fetchDeleteTodo,
@@ -17,18 +18,33 @@ import TodoForm from "./TodoForm";
 
 function App() {
 
-    const [isLogout, setIsLogout] = useState(true);
+    const [user, setUser] = useState('');
     const [todos, setTodos] = useState({});
+
+    const trigger1 = user === '';
+
+    useEffect(() => console.log('effect!!!'), [trigger1]);
+
+    if (user) {
+        fetchSession()
+        .then(results => {
+            console.log(results);
+            setUser(results);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    }
 
     const onLogin = (username) => {
         fetchLogin(username)
         .then(results => {
             console.log(results);
             setTodos(results);
-            setIsLogout(false);
+            setUser(username);
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
@@ -36,10 +52,10 @@ function App() {
         fetchLogout()
         .then(results => {
             console.log(results);
-            setIsLogout(true);
+            setUser('');
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
@@ -47,14 +63,18 @@ function App() {
         fetchAddTodo(newTask)
         .then(results => {
             console.log(results);
+
             fetchTodos()
             .then(todos =>{
                 console.log("res_todos="+ todos);
                 setTodos(todos);
-            }).catch();
+            })
+            .catch(err => {
+                console.error(err);
+            });;
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
@@ -71,14 +91,18 @@ function App() {
         fetchUpdateTodo(id, todo)
         .then(results => {
             console.log(results);
+
             fetchTodos()
-                .then(todos =>{
-                    console.log("res_todos="+ todos);
-                    setTodos(todos);
-                }).catch();
+            .then(todos =>{
+                console.log("res_todos="+ todos);
+                setTodos(todos);
+            })
+            .catch(err => {
+                console.error(err);
+            });
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
@@ -86,21 +110,25 @@ function App() {
         fetchDeleteTodo(id)
         .then(results => {
             console.log(results);
+
             fetchTodos()
-                .then(todos =>{
-                    console.log("res_todos="+ todos);
-                    setTodos(todos);
-                }).catch();
+            .then(todos =>{
+                console.log("res_todos="+ todos);
+                setTodos(todos);
+            })
+            .catch(err => {
+                console.error(err);
+            });
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
 
     return (
         <div className="app">
-            {isLogout
+            {!user
                 ? (<LoginForm onLogin={onLogin}></LoginForm>)
 
                 : (<div className="content">
