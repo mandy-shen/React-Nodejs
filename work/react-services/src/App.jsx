@@ -1,8 +1,17 @@
 import { useState } from "react";
 
 import './App.css';
+
+import {
+    fetchLogin,
+    fetchLogout,
+    fetchAddTodo,
+    fetchUpdateTodo,
+    fetchDeleteTodo,
+    fetchTodos,
+} from "./services";
 import LoginForm from "./LoginForm";
-import {fetchAddTodo, fetchDeleteTodo, fetchLogin, fetchTodos, fetchUpdateTodo} from "./services";
+import LogoutForm from "./LogoutForm";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 
@@ -20,13 +29,16 @@ function App() {
         });
     }
 
-    // fetchSession()
-    // .then(results => {
-    //     setUsername(results);
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
+    const onLogout = () => {
+        fetchLogout()
+        .then(results => {
+            console.log(results);
+
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     const onAddTodo = (newTask) => {
         fetchAddTodo(newTask)
@@ -54,38 +66,39 @@ function App() {
         }
 
         fetchUpdateTodo(id, todo)
-            .then(results => {
-                console.log(results);
-                fetchTodos()
-                    .then(todos =>{
-                        console.log("res_todos="+ todos);
-                        setTodos(todos);
-                    }).catch();
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        .then(results => {
+            console.log(results);
+            fetchTodos()
+                .then(todos =>{
+                    console.log("res_todos="+ todos);
+                    setTodos(todos);
+                }).catch();
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     const onDeleteTodo = (id) => {
         fetchDeleteTodo(id)
-            .then(results => {
-                console.log(results);
-                fetchTodos()
-                    .then(todos =>{
-                        console.log("res_todos="+ todos);
-                        setTodos(todos);
-                    }).catch();
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        .then(results => {
+            console.log(results);
+            fetchTodos()
+                .then(todos =>{
+                    console.log("res_todos="+ todos);
+                    setTodos(todos);
+                }).catch();
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
 
     return (
         <div className="app">
             <LoginForm onLogin={onLogin}></LoginForm>
+            <LogoutForm onLogout={onLogout}></LogoutForm>
             <div className="content">
                 <TodoList todos={todos}
                           onUpdateTodo={onUpdateTodo}
