@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { reducer, initialState } from './reducer';
 import TodoContext from './TodoContext';
 
@@ -22,16 +22,39 @@ function App() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+
+    useEffect(
+        () => {
+
+            fetchSession()
+            .then(username => {
+                fetchTodos()
+                .then(todos => {
+
+                    dispatch({
+                        type: 'loadTodos',
+                        todos: todos,
+                        username: username,
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+        }
+    );
+
     const onLogin = (username) => {
         fetchLogin(username)
         .then(todos => {
             dispatch({
                 type: 'login',
                 username: username,
-            });
-            dispatch({
-                type: 'loadTodos',
-                todos: todos,
+                todos: todos
             });
         })
         .catch(err => {
@@ -105,7 +128,7 @@ function App() {
                 onToggleTodo,
                 onDeleteTodo
             } }>
-                {!state.username
+                {!state.isLoggedIn
                     ? (<LoginForm></LoginForm>)
 
                     : (<div className="content">

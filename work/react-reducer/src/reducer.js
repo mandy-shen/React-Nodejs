@@ -1,6 +1,7 @@
 export const initialState = {
     isLoaded: false,
     isLoggedIn: false,
+    username: '',
     todos: {},
 };
 
@@ -11,11 +12,13 @@ export function reducer( state, action ) {
                 ...state,
                 isLoaded: true,
                 todos: action.todos,
+                isLoggedIn: true,
+                username: action.username,
             };
         case 'logout':
             return { ...state, isLoaded: false, isLoggedIn: false, username: '', todos: {} };
         case 'login':
-            return { ...state, isLoggedIn: true, username: action.username };
+            return { ...state, isLoggedIn: true, username: action.username, todos: action.todos };
         case 'addTodo':
             return {
                 ...state,
