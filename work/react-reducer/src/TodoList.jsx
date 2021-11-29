@@ -10,7 +10,7 @@ function TodoList({todos}) {
                  className="todo__toggle"
                  checked={todo.done}
                  onChange={() => onToggleTodo(todo.id, todo.task, !todo.done)}/>
-          <span>{todo.task}</span>
+          <span className={`${todo.done ? 'todo__text--complete': ''}`}>{todo.task}</span>
           <button className="todo__delete"
                   onClick={() => onDeleteTodo(todo.id)}>&#10060;</button>
       </li>
