@@ -22,31 +22,26 @@ function App() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-
+    let username;
     useEffect(
         () => {
-
             fetchSession()
-            .then(username => {
-                fetchTodos()
-                .then(todos => {
-
-                    dispatch({
-                        type: 'loadTodos',
-                        todos: todos,
-                        username: username,
-                    });
-                })
-                .catch(err => {
-                    console.error(err);
+            .then(tmpUsername => {
+                username = tmpUsername;
+            })
+            .then(fetchTodos)
+            .then(todos => {
+                dispatch({
+                    type: 'loadTodos',
+                    todos: todos,
+                    username: username,
                 });
             })
             .catch(err => {
                 console.error(err);
             });
 
-        }
-    );
+        }, []); //effect run one time
 
     const onLogin = (username) => {
         fetchLogin(username)
@@ -132,7 +127,7 @@ function App() {
                     ? (<LoginForm></LoginForm>)
 
                     : (<div className="content">
-                            <LogoutForm></LogoutForm>
+                            <LogoutForm username={state.username}></LogoutForm>
                             <TodoList todos={state.todos}></TodoList>
                             <TodoForm></TodoForm>
                         </div>
