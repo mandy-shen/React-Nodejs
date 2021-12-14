@@ -22,23 +22,28 @@ function App() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    let username;
     useEffect(
         () => {
+
             fetchSession()
-            .then(tmpUsername => {
-                username = tmpUsername;
-            })
-            .then(fetchTodos)
-            .then(todos => {
-                dispatch({
-                    type: 'loadTodos',
-                    todos: todos,
-                    username: username,
+            .then(username => {
+
+                fetchTodos()
+                .then(todos => {
+
+                    dispatch({
+                        type: 'loadTodos',
+                        todos: todos,
+                        username: username,
+                    });
+                })
+                .catch(err => {
+                    console.error(err.error);
                 });
+
             })
             .catch(err => {
-                console.error(err);
+                console.error(err.error);
             });
 
         }, []); //effect run one time
@@ -53,7 +58,7 @@ function App() {
             });
         })
         .catch(err => {
-            console.error(err);
+            console.error(err.error);
         });
     }
 
@@ -65,7 +70,7 @@ function App() {
             });
         })
         .catch(err => {
-            console.error(err);
+            console.error(err.error);
         });
     }
 
@@ -78,7 +83,7 @@ function App() {
             });
         })
         .catch(err => {
-            console.error(err);
+            console.error(err.error);
         });
     }
 
@@ -97,7 +102,7 @@ function App() {
             });
         })
         .catch(err => {
-            console.error(err);
+            console.error(err.error);
         });
     }
 
@@ -110,7 +115,7 @@ function App() {
             });
         })
         .catch(err => {
-            console.error(err);
+            console.error(err.error);
         });
     }
 
