@@ -1,3 +1,6 @@
+/*
+ this file is for storing all user's names.
+ */
 const users = {};
 
 function getUserData(username) {

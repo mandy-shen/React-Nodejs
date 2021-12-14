@@ -1,4 +1,6 @@
-
+/*
+ this file is for frontend listing all the fetch API to backend.
+ */
 
   function fetchAddTodo(task) {
     return fetch('/api/todos', {

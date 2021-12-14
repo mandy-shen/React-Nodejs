@@ -1,3 +1,6 @@
+/*
+ this file is for storing session.
+ */
 const uuid = require('uuid').v4;
 
 const sessions = {};

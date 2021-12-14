@@ -1,3 +1,6 @@
+/*
+ this file is for frontend Main render.
+ */
 import { useEffect, useReducer } from "react";
 import { reducer, initialState } from './reducer';
 import TodoContext from './TodoContext';
@@ -20,8 +23,11 @@ import TodoForm from "./TodoForm";
 
 function App() {
 
+    // dispatch to reducer and store the state
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    // useEffect updates when the component renders.
+    // When the page loads, it should check to see if the user is already logged in.
     useEffect(
         () => {
 
@@ -46,7 +52,7 @@ function App() {
                 console.error(err.error);
             });
 
-        }, []); //effect run one time
+        }, []); // [] effect run one time
 
     const onLogin = (username) => {
         fetchLogin(username)

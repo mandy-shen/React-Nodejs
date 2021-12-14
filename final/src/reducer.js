@@ -1,3 +1,6 @@
+/*
+ this file is for frontend React useReducer.
+ */
 export const initialState = {
     isLoaded: false,
     isLoggedIn: false,
