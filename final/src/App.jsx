@@ -55,6 +55,7 @@ function App() {
 
         }, []); // [] effect run one time
 
+    // call login and change state
     const onLogin = (username) => {
         fetchLogin(username)
         .then(todos => {
@@ -69,6 +70,7 @@ function App() {
         });
     }
 
+    // call logout and change state
     const onLogout = () => {
         fetchLogout()
         .then(() => {
@@ -81,6 +83,7 @@ function App() {
         });
     }
 
+    // call AddTodo and change state
     const onAddTodo = (newTask) => {
         fetchAddTodo(newTask)
         .then((todo) => {
@@ -94,6 +97,7 @@ function App() {
         });
     }
 
+    // call ToggleTodo and change state
     const onToggleTodo = (id, task, done) => {
         const updateTodo = {
             id: id,
@@ -113,6 +117,7 @@ function App() {
         });
     }
 
+    // call DeleteTodo and change state
     const onDeleteTodo = (id) => {
         fetchDeleteTodo(id)
         .then(() => {
@@ -126,6 +131,7 @@ function App() {
         });
     }
 
+    // store above methods in to Context, so that other jsx file could get method from Context
     return (
         <div className="app">
             <TodoContext.Provider value={ {
@@ -138,7 +144,7 @@ function App() {
                 {!state.isLoggedIn
                     ? (<LoginForm></LoginForm>)
 
-                    : (<div className="content">
+                    : (<div>
                             <LogoutForm username={state.username}></LogoutForm>
                             <TodoList todos={state.todos}></TodoList>
                             <TodoForm></TodoForm>

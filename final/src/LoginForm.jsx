@@ -12,10 +12,12 @@ const LoginForm = () => {
 
     const [user, setUser] = useState('');
 
+    // onChange event to setUser state
     const handleChange = e => {
-        setUser(e.target.value);
+        setUser(e.target.value); // use 'e.target.value'
     }
 
+    // onClick event trigger onChange event and then call onLogin(user)
     const handleSubmit = e => {
         e.preventDefault(); // prevent default action
         if (user) {
@@ -24,7 +26,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="login">
+        <div className="form-panel">
         <form>
             <label>Username: </label>
             <input type="text" value={user} name="username" onChange={handleChange} />

@@ -1,7 +1,14 @@
 /*
  this file is for frontend listing all the fetch API to backend.
+
+ use Promise to make：
+  1. improves code readability.
+  2. better handling of asynchronous operations.
+  3. Better flow of control definition in asynchronous logic.
+  4. better error handling.
  */
 
+  // fetch backend api to create certain task
   function fetchAddTodo(task) {
     return fetch('/api/todos', {
       method: 'POST',
@@ -21,6 +28,7 @@
     });
   }
 
+  // fetch backend api to delete certain task
   function fetchDeleteTodo(id) {
     return fetch(`/api/todos/${id}`, {
       method: 'DELETE',
@@ -36,6 +44,7 @@
     });
   }
 
+  // fetch backend api to update certain task via patch
   function fetchUpdateTodo( id, todoUpdates ) {
     return fetch(`/api/todos/${id}`, {
       method: 'PATCH',
@@ -55,6 +64,7 @@
     });
   }
 
+  // fetch backend api to get todos
   function fetchTodos() {
     return fetch('/api/todos')
     .catch( () => Promise.reject({ error: 'networkError' }) )
@@ -68,6 +78,7 @@
     });
   }
 
+  // fetch backend api to get sessions
   function fetchSession() {
     return fetch('/api/session', {
       method: 'GET',
@@ -83,6 +94,7 @@
     });
   }
 
+  // fetch backend api to delete session
   function fetchLogout() {
     return fetch('/api/session', {
       method: 'DELETE',
@@ -98,6 +110,7 @@
     });
   }
 
+  // fetch backend api to create session
   function fetchLogin(username) {
     return fetch('/api/session', {
       method: 'POST',
@@ -117,6 +130,7 @@
     });
   }
 
+  // export all fetch methods for outer files to import
   module.exports = {
     fetchAddTodo,
     fetchDeleteTodo,

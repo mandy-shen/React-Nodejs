@@ -3,6 +3,8 @@
  store the common variables to change each methods' states.
  file '.js' are marked as a file only has js code.
  */
+
+// export initialState
 export const initialState = {
     isLoaded: false,
     isLoggedIn: false,
@@ -10,6 +12,7 @@ export const initialState = {
     todos: {},
 };
 
+// reducer is to change state by action(method)
 export function reducer( state, action ) {
     switch(action.type) {
         case 'loadTodos':

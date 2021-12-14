@@ -6,7 +6,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000; // use env variable first
 
 // store data
 const todos = require('./todos');
@@ -179,5 +179,6 @@ app.delete('/api/todos/:id', (req, res) => {
   res.json({ message: exists ? `todo ${id} deleted` : `todo ${id} did not exist` });
 });
 
+// set up app listening port
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 

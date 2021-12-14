@@ -1,5 +1,6 @@
 /*
  this file is for storing session.
+ use uuid to generate random id.
  */
 const uuid = require('uuid').v4;
 

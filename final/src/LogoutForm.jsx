@@ -5,16 +5,17 @@ import TodoContext from "./TodoContext";
 import {useContext} from "react";
 
 const LogoutForm = ({username}) => {
+    // get onLogout from TodoContext.Provider (Context)
     const { onLogout } = useContext(TodoContext);
 
     // every parameter are objects, transfer object to specific type
     const name = Object.values(username);
 
     return (
-        <div className="logout">
+        <div className="form-panel">
             <form>
-                <span>Login Username: {name}</span><br/>
                 <button type="submit" onClick={() => onLogout()} >Logout</button>
+                <span> Login User: {name}</span>
             </form>
         </div>
     )
