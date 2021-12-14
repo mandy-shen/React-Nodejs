@@ -7,7 +7,7 @@
 1. Install Node.js (v17.0.1)
 2. Open a terminal, type `npm install` to install all required library.
 3. Type `npm run build` to generate the frontend codes as static codes.
-4. Type `PORT=80 npm start` to run backend server.
+4. Type `PORT=80 npm start` to run entire app (backend server + static frontend).
 
 ## How To Use
 1. Open browser, go to `http://localhost:80`, you will see the login page.
