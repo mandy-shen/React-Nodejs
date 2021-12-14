@@ -8,9 +8,9 @@
 * Terminal
 * Web Browser (eg. Chrome)
 
-## How To Run App
+## How To Run App on Production
 1. Open a terminal. Type `npm install` to install all required libraries.
-4. Type `npm run build` to generate the frontend codes as static codes.
+4. Type `npm run build` to generate frontend codes as static codes.
 5. Type `PORT=80 npm start` to run entire app (backend server + static frontend).
 
 ## How To Use
