@@ -19,7 +19,7 @@ function TodoList({todos}) {
       </li>
     ));
 
-    return (<ul className="todos">{list}</ul>);
+    return (<ul className="todos">{list}</ul>); // only for return one whole element
 }
 
 export default TodoList;

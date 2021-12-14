@@ -6,6 +6,8 @@ import TodoContext from "./TodoContext";
 import {useContext} from "react";
 
 const LoginForm = () => {
+
+    // get onLogin from TodoContext.Provider (Context)
     const { onLogin } = useContext(TodoContext);
 
     const [user, setUser] = useState('');
@@ -15,7 +17,7 @@ const LoginForm = () => {
     }
 
     const handleSubmit = e => {
-        e.preventDefault();
+        e.preventDefault(); // prevent default action
         if (user) {
             handleChange(e, onLogin(user));
         }

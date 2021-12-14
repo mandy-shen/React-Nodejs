@@ -1,5 +1,7 @@
 /*
  this file is for frontend React useReducer.
+ store the common variables to change each methods' states.
+ file '.js' are marked as a file only has js code.
  */
 export const initialState = {
     isLoaded: false,

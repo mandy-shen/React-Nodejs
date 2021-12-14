@@ -1,5 +1,5 @@
 /*
- this file is for frontend React useContext.
+ this file is for frontend React default useContext.
  */
 import React from "react";
 

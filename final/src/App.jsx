@@ -1,5 +1,6 @@
 /*
  this file is for frontend Main render.
+ file '.jsx' are marked as a file has HTML tags.
  */
 import { useEffect, useReducer } from "react";
 import { reducer, initialState } from './reducer';
