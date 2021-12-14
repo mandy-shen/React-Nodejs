@@ -1,6 +1,7 @@
-# TODO APP
-This is an SPA, RESTful Web Application using React and Express, for any users to login/logout and store their todo list.
-They can list their tasks, add new tasks, mark completed tasks, and delete tasks.
+# TODO LIST APP
+* This is an SPA, RESTful Web Application using React and Express, for any users to login/logout and store their todo list.
+* Use session to keep the login users.
+* They can list their tasks, add new tasks, mark completed tasks, and delete tasks.
 
 ## How To Run
 1. Install Node.js (v17.0.1)
