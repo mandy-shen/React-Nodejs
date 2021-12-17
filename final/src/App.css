@@ -1,0 +1,76 @@
+/*
+ this file is for App CSS.
+ write meaningful css in separate listing.
+ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: rgb(224, 247, 239);
+}
+
+.todos {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.todo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+
+.todo:hover,
+.todo:focus {
+    background-color: darkcyan;
+    cursor: pointer;
+}
+
+.todo label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.todo__text--complete {
+    text-decoration: line-through;
+}
+
+
+.todo__delete {
+    display: none;
+    border: none;
+    background-color: transparent;
+    font-size: 0.8rem;
+    margin-left: 0.25rem;
+    min-width: 30px;
+    min-height: 30px;
+    cursor: pointer;
+}
+.todo__delete:hover {
+    border: 1px solid black;
+    filter: brightness(2);
+    background-color: darkcyan;
+}
+
+.todo:focus-within .todo__delete,
+.todo:hover .todo__delete {
+    display: inline-block;
+}
+
+.form-panel {
+    padding: 20px;
+    border-style: double;
+    border-width: 3px;
+    border-color: darkcyan;
+    background-color: rgb(224, 247, 239);
+}
